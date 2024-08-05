@@ -5,6 +5,9 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+## Test Database
+/database
+
 ### STS ###
 .apt_generated
 .classpath
