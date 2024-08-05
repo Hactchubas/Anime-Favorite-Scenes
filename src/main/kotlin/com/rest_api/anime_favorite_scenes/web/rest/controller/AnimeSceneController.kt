@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
-@RequestMapping("/json/scenes")
+@RequestMapping("/json/scenes", produces = [MediaType.APPLICATION_JSON_VALUE])
 class AnimeSceneController(
     private val sceneService: SceneService,
     private val traceMoeConnection: TraceMoeConnection,
