@@ -34,38 +34,6 @@ class AnimeSceneController(
     fun getScenes(): List<SceneDTO> = sceneRepository.findAll().toList().map {
         sceneMapper.toDTO(it)
     }
-
-    //    @GetMapping("/ranked")
-//    fun getRankedScenes() : List<SceneDTO> = sceneRepository.findAll().toList().sortedByDescending {
-//        it.likes
-//    }.map {
-//        sceneMapper.toDTO(it)
-//    }
-    @GetMapping("/ranked", produces = [MediaType.APPLICATION_PROTOBUF_VALUE])
-    fun getRankedScenes(): ResponseEntity<ByteArray> {
-        val scenes = sceneRepository.findAll().toList().sortedByDescending {
-            it.likes
-        }.map {
-            Allscenes.Scene.newBuilder()
-                .setId(it.id.toDouble())
-                .setName(it.name)
-                .setEpisode(it.episode)
-                .setLikes(it.likes.toDouble())
-                .setStartTime(it.startTime.toDouble())
-                .setSceneImage(it.sceneImgUrl)
-                .setDescription(it.description)
-                .build()
-        }
-
-        val allRankedScenes = Allscenes.AllRankedScenes.newBuilder().apply {
-            scenes.forEach{
-                addScenes(it)
-            }
-        }.build()
-        val headers = HttpHeaders()
-        return ResponseEntity(allRankedScenes.toByteArray(), headers, HttpStatus.OK)
-    }
-
     @PostMapping("/new")
     fun findCreateScene(@RequestBody requestDTO: RequestDTO): SceneDTO? {
         val imgUrl = requestDTO.imgUrl ?: return null
