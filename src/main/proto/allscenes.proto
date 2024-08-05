@@ -1,0 +1,15 @@
+syntax = "proto3";
+package anime_scenes;
+
+message Scene{
+  double id = 1;
+  string name = 2;
+  string episode = 3;
+  double likes = 4;
+  double startTime = 5;
+  string sceneImage = 6;
+  string description = 7;}
+
+message AllRankedScenes{
+  repeated Scene scenes = 1;
+}
