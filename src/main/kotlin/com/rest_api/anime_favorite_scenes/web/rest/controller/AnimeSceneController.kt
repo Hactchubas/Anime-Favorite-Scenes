@@ -49,7 +49,7 @@ class AnimeSceneController(
     }
 
     @PutMapping("description/{id}")
-    fun likeScene(@PathVariable id: Long, @RequestBody requestDTO: RequestDTO): SceneDTO? {
+    fun editDescriptionScene(@PathVariable id: Long, @RequestBody requestDTO: RequestDTO): SceneDTO? {
         val description = requestDTO.description ?: return null
         return sceneService.editDescription(id, description)
     }
